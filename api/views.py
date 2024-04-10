@@ -1,8 +1,126 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .models import Patron, Transaction, Journey, Fare, Station, Card
+from .serializers import PatronSerializer, TransactionSerializer, JourneySerializer, FareSerializer, StationSerializer, CardSerializer
+
+
 
 # Create your views here.
 
 
+@api_view(['GET'])
 def apiOverview(request):
-    return JsonResponse('This is the home page for the API Routes', safe=False)
+    
+    routes = {
+        'Patrons': '/patrons',
+        'Transactions': '/transactions',
+        'Journeys': '/journeys',
+        'Fares': '/fares',
+        'Stations': '/stations',
+        'Cards': '/cards',
+    }
+    
+    return Response(routes)
+
+@api_view(['GET'])
+def getPatrons(request):
+    patrons = Patron.objects.all()
+    serializer = PatronSerializer(patrons, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getPatron(request, pk):
+    patron = Patron.objects.get(id=pk)
+    serializer = PatronSerializer(patron, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getTransactions(request):
+    transactions = Transaction.objects.all()
+    serializer = TransactionSerializer(transactions, many=True)
+    return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+def getTransaction(request, pk):
+    transaction = Transaction.objects.get(id=pk)
+    serializer = TransactionSerializer(transaction, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getJourneys(request):
+    journeys = Journey.objects.all()
+    serializer = JourneySerializer(journeys, many=True)
+    return Response(serializer.data)
+
+
+
+
+
+@api_view(['GET'])
+def getJourney(request, pk):
+    journey = Journey.objects.get(id=pk)
+    serializer = JourneySerializer(journey, many=False)
+    return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+def getFares(request):
+    fares = Fare.objects.all()
+    serializer = FareSerializer(fares, many=True)
+    return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+def getFare(request, pk):
+    fare = Fare.objects.get(id=pk)
+    serializer = FareSerializer(fare, many=False)
+    return Response(serializer.data)
+
+
+
+
+
+
+@api_view(['GET'])
+def getStations(request):
+    stations = Station.objects.all()
+    serializer = StationSerializer(stations, many=True)
+    return Response(serializer.data)
+
+
+
+
+
+
+@api_view(['GET'])
+def getStation(request, pk):
+    station = Station.objects.get(id=pk)
+    serializer = StationSerializer(station, many=False)
+    return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+def getCards(request):
+    cards = Card.objects.all()
+    serializer = CardSerializer(cards, many=True)
+    return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+def getCard(request, pk):
+    card = Card.objects.get(id=pk)
+    serializer = CardSerializer(card, many=False)
+    return Response(serializer.data)
