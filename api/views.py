@@ -30,11 +30,35 @@ def getPatrons(request):
     return Response(serializer.data)
 
 
+
+
 @api_view(['GET'])
 def getPatron(request, pk):
-    patron = Patron.objects.get(id=pk)
-    serializer = PatronSerializer(patron, many=False)
-    return Response(serializer.data)
+    try:
+        patron = Patron.objects.get(pk=pk)
+    except Patron.DoesNotExist:
+        return Response({"error": "Patron not found"}, status=404)
+    
+    transactions = Transaction.objects.filter(patron=patron)
+    journeys = Journey.objects.filter(patron=patron)
+    cards = Card.objects.filter(patron=patron)
+    
+    patron_serializer = PatronSerializer(patron)
+    transaction_serializer = TransactionSerializer(transactions, many=True)
+    journey_serializer = JourneySerializer(journeys, many=True)
+    card_serializer = CardSerializer(cards, many=True)
+    
+    context = {
+        "patron": patron_serializer.data,
+        "transactions": transaction_serializer.data,
+        "journeys": journey_serializer.data,
+        "cards": card_serializer.data
+    }
+    
+    return Response(context)
+
+
+
 
 
 @api_view(['GET'])
