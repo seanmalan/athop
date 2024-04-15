@@ -15,8 +15,10 @@ I have a word doc with my initial ideas and plan for the app. This will be updat
 
 To use this app simply clone the project to your desktop. Open the folder in vscode. Open your terminal using control + J. type in
   scripts\activate
-  pip install django rest_framework
-  pip install corsheaders
+  pip install djangorestframework
+  pip install django-cors-headers
+  pip install python-dotenv
+  pip install psycopg2
   python manage.py runserver
 This will start up the back-end server and you will be able to use the API.
 
