@@ -101,7 +101,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://postgres:dewQrCisiKosobpybarJYOWQGuwHMgkm@roundhouse.proxy.rlwy.net:21388/railway')
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation
