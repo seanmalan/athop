@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +31,7 @@ SECRET_KEY = 'e3f6b90abdb2c75c057ece74673b6540'
 DEBUG = True
 
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
+
 
 
 # Application definition
@@ -101,6 +103,8 @@ DATABASES = {
         'PORT': DB_PORT,
     }
 }
+
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation
