@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,15 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = 'e3f6b90abdb2c75c057ece74673b6540'
+SECRET_KEY = 'django-insecure-cb7*&rz_@eepjs%kz7r_9fk%)m(k#)19@wybd^228(*pas5+uz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 DEBUG = True
 
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
-
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -91,8 +87,6 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
 DB_PORT = os.environ.get('DB_PORT')
 
-
-database_url = os.environ.get('DATABASE_URL')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -103,8 +97,6 @@ DATABASES = {
         'PORT': DB_PORT,
     }
 }
-
-DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation
