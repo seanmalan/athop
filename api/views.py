@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from .models import Patron, Transaction, Journey, Fare, Station, Card
 from .serializers import PatronSerializer, TransactionSerializer, JourneySerializer, FareSerializer, StationSerializer, CardSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -49,6 +50,7 @@ def getPatrons(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getPatron(request, pk):
     try:
         patron = Patron.objects.get(pk=pk)
