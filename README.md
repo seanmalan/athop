@@ -19,6 +19,7 @@ To use this app simply clone the project to your desktop. Open the folder in vsc
   pip install django-cors-headers
   pip install python-dotenv
   pip install psycopg2
+  pip install djangorestframework-simplejwt
   python manage.py runserver
 This will start up the back-end server and you will be able to use the API.
 
